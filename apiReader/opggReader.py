@@ -1,0 +1,1 @@
+# contains methods that scrape data from op.gg

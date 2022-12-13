@@ -1,0 +1,3 @@
+league api only offers 20 games for each account.
+However, I could try to scrape data straight from op.gg
+^ worked, see test.py
