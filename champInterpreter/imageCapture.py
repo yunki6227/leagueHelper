@@ -1,7 +1,4 @@
-import os, time
 import pyautogui
-import cv2
-from PIL import ImageChops
 
 # Captures images for each champion's name, like Octoberfest Gragas, for each player in loading screen
 # return some data with image information and player information, perhaps in a tuple (player,image)
@@ -11,7 +8,20 @@ from PIL import ImageChops
 
 # calls captureImage 10 times to capture 
 def captureNames():
-    return 0
+    images=[]
+    x=0 #x coordinate for leftmost champion name
+    y=0 #y coordinate for top team champions' names
+    width=0 #width of name
+    height=0 #height of name
+    for i in range(5):
+        images.append(captureImage(x,y,width,height))
+        x+=0
+    y=0 #set y coordinate for bottom team names
+    x=0 #reset x coordinate to face leftmost champion
+    for i in range(5):
+        images.append(captureImage(x,y,width,height))
+        x+=0
+    return images
 
 def captureImage(x,y,width,height):
-    return 0
+    return pyautogui.screenshot(region=(x,y,width,height))

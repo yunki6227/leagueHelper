@@ -1,3 +1,6 @@
 league api only offers 20 games for each account.
 However, I could try to scrape data straight from op.gg
 ^ worked, see test.py
+
+blue side is top and red side is bottom, need to figure out which team is "our" team.
+^ possibly name being yellow
