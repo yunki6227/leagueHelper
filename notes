@@ -4,3 +4,8 @@ However, I could try to scrape data straight from op.gg
 
 blue side is top and red side is bottom, need to figure out which team is "our" team.
 ^ possibly name being yellow
+
+I need these things to connect skin name to actual champion:
+1. need to get a list of skins(maybe i need to request it from a website)
+2. need to connect those list of skins to a champion (maybe dictionary?)
+3. Then just do dictionary[skinName], which will return a champion name.
