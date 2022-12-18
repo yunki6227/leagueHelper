@@ -9,18 +9,18 @@ import pyautogui
 # calls captureImage 10 times to capture 
 def captureNames():
     images=[]
-    x=0 #x coordinate for leftmost champion name
-    y=0 #y coordinate for top team champions' names
-    width=0 #width of name
-    height=0 #height of name
+    x=242 #x coordinate for leftmost champion name
+    y=400 #y coordinate for top team champions' names
+    width=250 #width of name
+    height=20 #height of name
     for i in range(5):
         images.append(captureImage(x,y,width,height))
-        x+=0
-    y=0 #set y coordinate for bottom team names
-    x=0 #reset x coordinate to face leftmost champion
+        x+=296
+    y=935 #set y coordinate for bottom team names
+    x=242 #reset x coordinate to face leftmost champion
     for i in range(5):
         images.append(captureImage(x,y,width,height))
-        x+=0
+        x+=296
     return images
 
 def captureImage(x,y,width,height):

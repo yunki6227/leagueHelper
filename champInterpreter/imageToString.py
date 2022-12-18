@@ -20,4 +20,5 @@ def convertImagetoStringHelper(image):
     return text[:-1]
 
 # image=Image.open("resource\\test1.PNG")
-# print(convertImagetoStringHelper(image))
+# print(convertImagetoString)
+print(convertImagetoString())
