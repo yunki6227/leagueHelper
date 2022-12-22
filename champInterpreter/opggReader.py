@@ -5,23 +5,9 @@ from selenium import webdriver
 
 def getTeamWinrate(names):
     totalWinrate=0
-    options = webdriver.ChromeOptions()
-    options.add_argument('--allow-running-insecure-content')
-    options.add_argument('--ignore-ssl-errors')
-    options.add_argument('--ignore-certificate-errors')
-    driver = webdriver.Chrome(options=options)
+    driver = getChromeDriverWithOptions()
     for i in range(5):
-        lane=""
-        if i == 0:
-            lane = "top"
-        elif i == 1:
-            lane = "jungle"
-        elif i == 2:
-            lane = "mid"
-        elif i == 3:
-            lane = "adc"
-        else:
-            lane = "support"
+        lane = getLaneInfoString(i)
         driver.get("https://www.op.gg/champions/"+names[i]+"/"+lane+"/counters?region=global&tier=all&target_champion="+names[i+5])
         source = driver.page_source
         soup = BeautifulSoup(source,"html.parser")
@@ -42,7 +28,29 @@ def getTeamWinrate(names):
 
     print(str(round(totalWinrate/5,2))+"%")
     driver.close()
-    return round(totalWinrate/5,2)  
+    return round(totalWinrate/5,2) 
+
+def getLaneInfoString(i):
+    lane=""
+    if i == 0:
+        lane = "top"
+    elif i == 1:
+        lane = "jungle"
+    elif i == 2:
+        lane = "mid"
+    elif i == 3:
+        lane = "adc"
+    else:
+        lane = "support"
+    return lane
+
+def getChromeDriverWithOptions():
+    options = webdriver.ChromeOptions()
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument('--ignore-ssl-errors')
+    options.add_argument('--ignore-certificate-errors')
+    driver = webdriver.Chrome(options=options)
+    return driver 
 
 if __name__ == "__main__":
     testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']
