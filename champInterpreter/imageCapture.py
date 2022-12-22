@@ -1,5 +1,5 @@
 import pyautogui
-
+import time
 # Captures images for each champion's name, like Octoberfest Gragas, for each player in loading screen
 # return some data with image information and player information, perhaps in a tuple (player,image)
 # Example: (top1, image_top1) would mean top player from team 1, and its corresponding image
@@ -13,6 +13,7 @@ def captureNames():
     y=400 #y coordinate for top team champions' names
     width=250 #width of name
     height=20 #height of name
+    time.sleep(2)
     for i in range(5):
         images.append(captureImage(x,y,width,height))
         x+=296

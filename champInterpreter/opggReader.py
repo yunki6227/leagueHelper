@@ -5,7 +5,11 @@ from selenium import webdriver
 
 def getTeamWinrate(names):
     totalWinrate=0
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument('--ignore-ssl-errors')
+    options.add_argument('--ignore-certificate-errors')
+    driver = webdriver.Chrome(options=options)
     for i in range(5):
         lane=""
         if i == 0:
@@ -37,7 +41,12 @@ def getTeamWinrate(names):
             totalWinrate+=winrate        
 
     print(str(round(totalWinrate/5,2))+"%")
+    driver.close()
     return round(totalWinrate/5,2)  
+
+if __name__ == "__main__":
+    testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']
+    getTeamWinrate(testNames)
 
 # def getTeamWinrate(names):
 #     totalWinrate=0
@@ -46,37 +55,37 @@ def getTeamWinrate(names):
 #     print(str(round(totalWinrate/5,2))+"%")
 #     return round(totalWinrate/5,2)   
 
-def getChampWinrate(champion1,champion2,laneNum):
-    lane=""
-    if laneNum == 0:
-        lane = "top"
-    elif laneNum == 1:
-        lane = "jungle"
-    elif laneNum == 2:
-        lane = "mid"
-    elif laneNum == 3:
-        lane = "adc"
-    else:
-        lane = "support"
+# def getChampWinrate(champion1,champion2,laneNum):
+#     lane=""
+#     if laneNum == 0:
+#         lane = "top"
+#     elif laneNum == 1:
+#         lane = "jungle"
+#     elif laneNum == 2:
+#         lane = "mid"
+#     elif laneNum == 3:
+#         lane = "adc"
+#     else:
+#         lane = "support"
     
-    driver = webdriver.Chrome()
-    driver.get("https://www.op.gg/champions/"+champion1+"/"+lane+"/counters?region=global&tier=all&target_champion="+champion2)
-    source = driver.page_source
-    soup = BeautifulSoup(source,"html.parser")
-    winrate = soup.find("span",{"class":"percent"})
-    if winrate:
-        winrate=winrate.getText()
-        winrate = float(winrate.replace('%',''))
-        print(winrate)
-        return winrate
-    else:
-        driver.get("https://www.op.gg/champions/"+champion2+"/"+lane+"/counters?region=global&tier=all&target_champion="+champion1)
-        source = driver.page_source
-        soup = BeautifulSoup(source,"html.parser")
-        winrate = soup.find("span",{"class":"percent"}).getText()
-        winrate = 100-float(winrate.replace('%',''))
-        print(winrate)
-        return winrate
+#     driver = webdriver.Chrome()
+#     driver.get("https://www.op.gg/champions/"+champion1+"/"+lane+"/counters?region=global&tier=all&target_champion="+champion2)
+#     source = driver.page_source
+#     soup = BeautifulSoup(source,"html.parser")
+#     winrate = soup.find("span",{"class":"percent"})
+#     if winrate:
+#         winrate=winrate.getText()
+#         winrate = float(winrate.replace('%',''))
+#         print(winrate)
+#         return winrate
+#     else:
+#         driver.get("https://www.op.gg/champions/"+champion2+"/"+lane+"/counters?region=global&tier=all&target_champion="+champion1)
+#         source = driver.page_source
+#         soup = BeautifulSoup(source,"html.parser")
+#         winrate = soup.find("span",{"class":"percent"}).getText()
+#         winrate = 100-float(winrate.replace('%',''))
+#         print(winrate)
+#         return winrate
 
 # testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']
 # getTeamWinrate(testNames)
