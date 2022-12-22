@@ -3,7 +3,7 @@ However, I could try to scrape data straight from op.gg
 ^ worked, see test.py
 
 blue side is top and red side is bottom, need to figure out which team is "our" team.
-^ possibly name being yellow
+^ possibly name being yellow. BGR value = 51,182,232
 
 I need these things to connect skin name to actual champion:
 1. need to get a list of skins(maybe i need to request it from a website)
