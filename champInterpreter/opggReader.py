@@ -5,10 +5,46 @@ from selenium import webdriver
 
 def getTeamWinrate(names):
     totalWinrate=0
+    driver = webdriver.Chrome()
     for i in range(5):
-        totalWinrate+=getChampWinrate(names[i],names[i+5],i)
+        lane=""
+        if i == 0:
+            lane = "top"
+        elif i == 1:
+            lane = "jungle"
+        elif i == 2:
+            lane = "mid"
+        elif i == 3:
+            lane = "adc"
+        else:
+            lane = "support"
+        driver.get("https://www.op.gg/champions/"+names[i]+"/"+lane+"/counters?region=global&tier=all&target_champion="+names[i+5])
+        source = driver.page_source
+        soup = BeautifulSoup(source,"html.parser")
+        winrate = soup.find("span",{"class":"percent"})
+        if winrate:
+            winrate=winrate.getText()
+            winrate = float(winrate.replace('%',''))
+            print(winrate)
+            totalWinrate+=winrate
+        else:
+            driver.get("https://www.op.gg/champions/"+names[i+5]+"/"+lane+"/counters?region=global&tier=all&target_champion="+names[i])
+            source = driver.page_source
+            soup = BeautifulSoup(source,"html.parser")
+            winrate = soup.find("span",{"class":"percent"}).getText()
+            winrate = 100-float(winrate.replace('%',''))
+            print(winrate)
+            totalWinrate+=winrate        
+
     print(str(round(totalWinrate/5,2))+"%")
-    return round(totalWinrate/5,2)   
+    return round(totalWinrate/5,2)  
+
+# def getTeamWinrate(names):
+#     totalWinrate=0
+#     for i in range(5):
+#         totalWinrate+=getChampWinrate(names[i],names[i+5],i)
+#     print(str(round(totalWinrate/5,2))+"%")
+#     return round(totalWinrate/5,2)   
 
 def getChampWinrate(champion1,champion2,laneNum):
     lane=""
@@ -42,8 +78,8 @@ def getChampWinrate(champion1,champion2,laneNum):
         print(winrate)
         return winrate
 
-testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']
-getTeamWinrate(testNames)
+# testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']
+# getTeamWinrate(testNames)
 
 # def getTeamWinrateOverTime():
 
