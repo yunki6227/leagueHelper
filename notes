@@ -17,7 +17,10 @@ when string from image is in the list of skin_name of database, then get its cor
 After all champion names, including skin name, have been converted to regular champion name, then link up with op.gg to do features.
 
 
-
+Need to do: detect if player is red team or blue team and change order. If player is in top team, then the player is in the blue team.
+If the player is on the bottom, then the player is in the red team.
+Thus, change the order of name 1 to 5 with 6 to 10 if the player is
+on the bottom. This can be done by detecting yellow font perhaps.
 
 
 learned:
