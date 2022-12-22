@@ -14,6 +14,6 @@ def getSkinInfos():
         return arraySkinChamp
     except:
          print("Error in getting skins information")
-         return [("","")]
+         return []
 
 #getSkinInfos()

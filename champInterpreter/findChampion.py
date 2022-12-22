@@ -15,3 +15,5 @@ def convertToChampionName(names):
 def getChampionNames():
     names=imageToString.convertImagetoString()
     return convertToChampionName(names)
+
+# print(getChampionNames())

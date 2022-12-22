@@ -59,6 +59,6 @@ def getChampion(connection,skinName):
 
 
     
-connection = connect()
+# connection = connect()
 
-print(getChampion(connection,"God-King Garen"))
+# print(getChampion(connection,"God-King Garen"))

@@ -11,3 +11,14 @@ I need these things to connect skin name to actual champion:
 3. Then just do dictionary[skinName], which will return a champion name. Edit: will just use sqlite database
 
 future feature: keep watching the background then when loading screen pops up, it automatically runs.
+
+when string from image is in the list of skin_name of database, then get its corresponding champion_name and replace. If not, then it'll mean that it is just a regular champion name, so just keep the same.
+
+After all champion names, including skin name, have been converted to regular champion name, then link up with op.gg to do features.
+
+
+
+
+
+learned:
+1. names for classes and stuff of inspect element in website might not match what soup gets, so if it doesn't work, print soup and look for it.
