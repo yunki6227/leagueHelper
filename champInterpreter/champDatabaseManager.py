@@ -15,9 +15,10 @@ def connect():
 
 def reset(connection):
     cursor = connection.cursor()
-    query = "DROP skins"
+    query = "DROP TABLE skins"
     cursor.execute(query)
-    connection = None
+    connection.commit()
+    connection.close()
 
 def createTables(connection):
     cursor = connection.cursor()
@@ -35,8 +36,29 @@ def populateData(connection):
         except:
             continue
     connection.commit()
-    connection.close()
     
+#returns original champion name. If it doesn't exist in the database, then update the database and rerun it.
+def getChampion(connection,skinName):
+    cursor = connection.cursor()
+    query = "SELECT champion_name FROM skins WHERE champion_name = \""+skinName+"\";"
+    cursor.execute(query)
+    
+    isChampion = cursor.fetchone()
+    if isChampion:
+        return skinName
+    
+    query = "SELECT champion_name FROM skins WHERE skin_name = \""+skinName+"\";"
+    cursor.execute(query)
+    
+    isSkin = cursor.fetchone()
+    if isSkin:
+        return isSkin[0]
+    cursor.close()
+    populateData(connection)
+    return getChampion(connection,skinName)
+
+
     
 connection = connect()
-populateData(connection)
+
+print(getChampion(connection,"God-King Garen"))
