@@ -29,12 +29,9 @@ def getChampWinrate(champion1,champion2,laneNum):
     source = driver.page_source
     soup = BeautifulSoup(source,"html.parser")
     winrate = soup.find("span",{"class":"percent"}).getText()
-    print(winrate)
     winrate = float(winrate.replace('%',''))
-    print(winrate)
     return winrate
 
-getChampWinrate("Garen","Irelia",0)
 # def getTeamWinrateOverTime():
 
 # def getChampWinrateOverTime():
