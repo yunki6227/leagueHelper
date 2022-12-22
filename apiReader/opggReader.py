@@ -1,6 +1,7 @@
 # contains methods that scrape data from op.gg
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 def getTeamWinrate(names):
     try:
@@ -16,8 +17,24 @@ def getChampWinrate(champion1,champion2,laneNum):
         lane = "top"
     elif laneNum == 1:
         lane = "jungle"
+    elif laneNum == 2:
+        lane = "mid"
+    elif laneNum == 3:
+        lane = "adc"
+    else:
+        lane = "support"
+    
+    driver = webdriver.Chrome()
+    driver.get("https://www.op.gg/champions/"+champion1+"/"+lane+"/counters?region=global&tier=all&target_champion="+champion2)
+    source = driver.page_source
+    soup = BeautifulSoup(source,"html.parser")
+    winrate = soup.find("span",{"class":"percent"}).getText()
+    print(winrate)
+    winrate = float(winrate.replace('%',''))
+    print(winrate)
+    return winrate
 
-
+getChampWinrate("Garen","Irelia",0)
 # def getTeamWinrateOverTime():
 
 # def getChampWinrateOverTime():
