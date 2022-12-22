@@ -3,6 +3,7 @@
 # if the skin name does not exist in the database, rerun connection in champDatabaseManager to 
 
 import champDatabaseManager
+import imageToString
 
 def convertToChampionName(names):
     champion_names=[]
@@ -10,3 +11,7 @@ def convertToChampionName(names):
     for name in names:
         champion_names.append(champDatabaseManager.getChampion(connection,name))
     return champion_names
+
+def getChampionNames():
+    names=imageToString.convertImagetoString()
+    return convertToChampionName(names)
