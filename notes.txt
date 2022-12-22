@@ -4,23 +4,23 @@ However, I could try to scrape data straight from op.gg
 
 blue side is top and red side is bottom, need to figure out which team is "our" team.
 ^ possibly name being yellow. BGR value = 51,182,232
+^^^^ Done
 
 I need these things to connect skin name to actual champion:
 1. need to get a list of skins(maybe i need to request it from a website)
 2. need to connect those list of skins to a champion (maybe dictionary?)
 3. Then just do dictionary[skinName], which will return a champion name. Edit: will just use sqlite database
-
-future feature: keep watching the background then when loading screen pops up, it automatically runs.
+^^^^ Done
 
 when string from image is in the list of skin_name of database, then get its corresponding champion_name and replace. If not, then it'll mean that it is just a regular champion name, so just keep the same.
+^^^^  Done
 
 After all champion names, including skin name, have been converted to regular champion name, then link up with op.gg to do features.
+^^^^ Done
 
-
-Need to do: detect if player is red team or blue team and change order. If player is in top team, then the player is in the blue team.
-If the player is on the bottom, then the player is in the red team.
-Thus, change the order of name 1 to 5 with 6 to 10 if the player is
-on the bottom. This can be done by detecting yellow font perhaps.
+Need to do: 
+keep watching the background then when loading screen pops up, it automatically runs.
+also need to put more useful statistics out. ALso need some form of GUI to output it cleanly
 
 
 learned:
