@@ -31,6 +31,7 @@ def getTeamWinrate(names):
     #print(str(round(totalWinrate/5,2))+"%")
     winrates.append(round(totalWinrate/5,2))
     driver.close()
+    driver.quit()
     return winrates 
 
 def getLaneInfoString(i):
@@ -53,7 +54,7 @@ def getChromeDriverWithOptions():
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Chrome(options=options)
-    return driver 
+    return driver
 
 if __name__ == "__main__":
     testNames=['Garen','Rengar','Viego','Zeri','Lux','Irelia','Hecarim','Akali','Jhin','Anivia']

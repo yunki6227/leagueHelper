@@ -15,5 +15,4 @@ def switchOrderIfTopIsNotMyTeam(names):
             names[i]=names[i+5]
             names[i+5]=temp
 
-time.sleep(2)
 main()

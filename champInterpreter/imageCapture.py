@@ -34,7 +34,6 @@ def isTopMyTeam():
     y=485
     width=165
     height=10
-    time.sleep(1)
     for i in range(5):
         images.append(captureImage(x,y,width,height))
         x+=296
@@ -48,18 +47,57 @@ def isTopMyTeam():
         if pixels>0:
             return True
     return False
+
+def whatLaneAmI():
+    images=[]
+    x=285
+    y=485
+    width=165
+    height=10
+    for i in range(5):
+        images.append(captureImage(x,y,width,height))
+        x+=296
+    for i in range(5):
+        images[i].save(r"resource\player.jpg")
+        images[i]=cv2.imread(r"resource\player.jpg")
+        lower=np.array([47,178,228])
+        upper=np.array([55,186,236])
+        yellows=cv2.inRange(images[i],lower,upper)
+        pixels = cv2.countNonZero(yellows)
+        if pixels>0:
+            return getLaneInfoString(i)
+    images.clear()
+    x=285
+    y = 1020
+    for i in range(5):
+        images.append(captureImage(x,y,width,height))
+        x+=296
+    for i in range(5):
+        images[i].save(r"resource\player.jpg")
+        images[i]=cv2.imread(r"resource\player.jpg")
+        lower=np.array([47,178,228])
+        upper=np.array([55,186,236])
+        yellows=cv2.inRange(images[i],lower,upper)
+        pixels = cv2.countNonZero(yellows)
+        if pixels>0:
+            return getLaneInfoString(i)
+    return "error"
+
+def getLaneInfoString(i):
+    lane=""
+    if i == 0:
+        lane = "top"
+    elif i == 1:
+        lane = "jungle"
+    elif i == 2:
+        lane = "mid"
+    elif i == 3:
+        lane = "adc"
+    else:
+        lane = "support"
+    return lane
+
 if __name__ == "__main__":
-    # time.sleep(2)
-    # image=captureImage(930,485,50,10)
-    # # image.save(r"resource\testPlayer.jpg")
-    # image=cv2.imread(r"resource\testPlayer.jpg")
-    # lower=np.array([49,180,230])
-    # upper=np.array([53,184,234])
-    # yellows=cv2.inRange(image,lower,upper)
-    # pixels = cv2.countNonZero(yellows)
-    # print(pixels)
-    # print(image[3,11,0])
-    # print(image[3,11,1])
-    # print(image[3,11,2])
-    print(isTopMyTeam())
+    time.sleep(2)
+    print(whatLaneAmI())
     
